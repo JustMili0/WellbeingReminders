@@ -10,8 +10,6 @@ base {
 
 repositories {
     maven("https://maven.parchmentmc.org")
-    maven("https://maven.bawnorton.com/releases") // MixinSquared extension for MixinExtras
-    maven("https://maven.enjarai.dev/mirrors") // MixinSquared extension for MixinExtras
     maven("https://maven.terraformersmc.com/") // Mod Menu
     maven("https://maven.caffeinemc.net/releases") // Sodium API
 }
@@ -26,7 +24,6 @@ dependencies {
     modCompileOnly("net.caffeinemc:sodium-fabric-api:${rootProject.property("sodium")}+mc${mcVersion}")
 
     modImplementation("com.terraformersmc:modmenu:${rootProject.property("mod_menu")}") // Mod menu
-    //include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${libs.versions.mixinsquared.get()}")!!)!!)
 }
 
 tasks.processResources {
@@ -56,6 +53,6 @@ java {
 
 tasks.jar {
 	from("LICENSE") {
-		rename { "${it}" }
+		rename { it }
 	}
 }
