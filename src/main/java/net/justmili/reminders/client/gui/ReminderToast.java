@@ -2,7 +2,7 @@ package net.justmili.reminders.client.gui;
 
 import net.justmili.reminders.client.RemindersClient;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -25,13 +25,13 @@ public class ReminderToast implements Toast {
     }
 
     @Override
-    public void render(GuiGraphics graphics, Font font, long visibleTime) {
+    public void extractRenderState(GuiGraphicsExtractor graphics, Font font, long fullyVisibleForMs) {
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, SYSTEM, 0, 0, width(), height());
 
-        graphics.renderItem(icon, 8, 8, 0);
+        graphics.item(icon, 8, 8, 0);
 
-        graphics.drawString(font, title, 30, 7, 0xFFFFFF00, false);
-        graphics.drawString(font, message, 30, 18, 0xFFFFFFFF, false);
+        graphics.text(font, title, 30, 7, 0xFFFFFF00, false);
+        graphics.text(font, message, 30, 18, 0xFFFFFFFF, false);
     }
 
     @Override

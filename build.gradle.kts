@@ -9,24 +9,19 @@ base {
 }
 
 repositories {
-    maven("https://maven.parchmentmc.org")
-    maven("https://maven.bawnorton.com/releases") // MixinSquared extension for MixinExtras
-    maven("https://maven.enjarai.dev/mirrors") // MixinSquared extension for MixinExtras
     maven("https://maven.terraformersmc.com/") // Mod Menu
     maven("https://maven.caffeinemc.net/releases") // Sodium API
 }
 
 dependencies {
     minecraft(libs.minecraft.get())
-    mappings(loom.officialMojangMappings())
-    modImplementation(libs.fabric.loader.get())
-    modImplementation(libs.fabric.api.get())
+    implementation(libs.fabric.loader.get())
+    implementation(libs.fabric.api.get())
 
     // https://maven.caffeinemc.net/#/releases/net/caffeinemc/sodium-fabric-api
-    modCompileOnly("net.caffeinemc:sodium-fabric-api:${rootProject.property("sodium")}+mc${mcVersion}")
+    compileOnly("net.caffeinemc:sodium-fabric-api:${rootProject.property("sodium")}+mc${mcVersion}")
 
-    modImplementation("com.terraformersmc:modmenu:${rootProject.property("mod_menu")}") // Mod menu
-    //include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${libs.versions.mixinsquared.get()}")!!)!!)
+    implementation("com.terraformersmc:modmenu:${rootProject.property("mod_menu")}") // Mod menu
 }
 
 tasks.processResources {
@@ -46,16 +41,16 @@ tasks.processResources {
 }
 
 tasks.withType<JavaCompile>().configureEach {
-	options.release = 21
+	options.release = 25
 }
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
 }
 
 tasks.jar {
 	from("LICENSE") {
-		rename { "${it}" }
+		rename { it }
 	}
 }
