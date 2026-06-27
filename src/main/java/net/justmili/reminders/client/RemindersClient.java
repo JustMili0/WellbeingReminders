@@ -3,7 +3,7 @@ package net.justmili.reminders.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.justmili.reminders.client.config.Config;
 import net.justmili.reminders.content.events.client.TickToasts;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class RemindersClient implements ClientModInitializer {
     public static final String MODID = "wbreminders";
@@ -17,10 +17,10 @@ public class RemindersClient implements ClientModInitializer {
         LOGGER.info("Initialized Wellbeing Reminders");
     }
 
-    public static ResourceLocation asResource(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    public static Identifier asResource(String path) {
+        return Identifier.fromNamespaceAndPath(MODID, path);
     }
-    public static ResourceLocation asMinecraft(String path) {
-        return ResourceLocation.withDefaultNamespace(path);
+    public static Identifier asMinecraft(String path) {
+        return Identifier.withDefaultNamespace(path);
     }
 }

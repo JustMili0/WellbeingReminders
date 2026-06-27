@@ -1,10 +1,10 @@
 [versions]
-minecraft = "1.21.1"
-parchment = "2024.11.17"
+minecraft = "1.21.11"
+parchment = "2025.12.20"
 
 # https://fabricmc.net/develop
 fabric_loader = "0.18.4"
-fabric_api = "0.116.12+1.21.1"
+fabric_api = "0.141.4+1.21.11"
 fabric_loom = "1.16-SNAPSHOT"
 
 # https://github.com/Bawnorton/MixinSquared/releases

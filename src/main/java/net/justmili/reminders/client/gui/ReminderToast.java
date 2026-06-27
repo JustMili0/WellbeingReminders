@@ -1,19 +1,22 @@
 package net.justmili.reminders.client.gui;
 
 import net.justmili.reminders.client.RemindersClient;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
-import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.client.gui.components.toasts.ToastManager;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class ReminderToast implements Toast {
-    private static final ResourceLocation SYSTEM = RemindersClient.asMinecraft("toast/advancement");
+    private static final Identifier SYSTEM = RemindersClient.asMinecraft("toast/advancement");
 
     private final Component title;
     private final Component message;
     private final ItemStack icon;
+    private Visibility wantedVisibility = Visibility.SHOW;
 
     public ReminderToast(Component title, Component message, ItemStack icon) {
         this.title = title;
@@ -22,15 +25,23 @@ public class ReminderToast implements Toast {
     }
 
     @Override
-    public Visibility render(GuiGraphics guiGraphics, ToastComponent component, long visibleTime) {
-        guiGraphics.blitSprite(SYSTEM, 0, 0, width(), height());
+    public void render(GuiGraphics graphics, Font font, long visibleTime) {
+        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, SYSTEM, 0, 0, width(), height());
 
-        guiGraphics.renderItem(icon, 8, 8, 0);
+        graphics.renderItem(icon, 8, 8, 0);
 
-        guiGraphics.drawString(component.getMinecraft().font, title, 30, 7, 0xFFFF00, false);
-        guiGraphics.drawString(component.getMinecraft().font, message, 30, 18, 0xFFFFFF, false);
+        graphics.drawString(font, title, 30, 7, 0xFFFFFF00, false);
+        graphics.drawString(font, message, 30, 18, 0xFFFFFFFF, false);
+    }
 
-        return visibleTime >= 5000? Visibility.HIDE : Visibility.SHOW;
+    @Override
+    public void update(ToastManager toastManager, long visibleTime) {
+        wantedVisibility = visibleTime >= 5000 * toastManager.getNotificationDisplayTimeMultiplier()? Visibility.HIDE : Visibility.SHOW;
+    }
+
+    @Override
+    public Visibility getWantedVisibility() {
+        return wantedVisibility;
     }
 
     @Override

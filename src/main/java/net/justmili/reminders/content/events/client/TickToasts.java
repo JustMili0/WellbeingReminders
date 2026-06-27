@@ -66,7 +66,7 @@ public class TickToasts {
     private static void newToast(Component reminderKey, ItemStack icon) {
         Minecraft client = Minecraft.getInstance();
 
-        client.getToasts().addToast(
+        client.getToastManager().addToast(
             new ReminderToast(TransKeys.reminderTitleKey, reminderKey, icon)
         );
         if (client.player != null) {
