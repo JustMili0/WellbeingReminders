@@ -1,6 +1,7 @@
 package net.justmili.reminders.content.events.client;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.justmili.reminders.client.RemindersClient;
 import net.justmili.reminders.client.config.Config;
 import net.justmili.reminders.client.gui.ReminderToast;
 import net.justmili.reminders.client.lang.TransKeys;
@@ -10,6 +11,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -41,11 +44,22 @@ public class TickToasts {
             wristExcReminder(sessionTicks);
 
             // Dev env stuff
-//            if (sessionTicks % 20 == 0) {
-//                RemindersClient.LOGGER.info("SESSION PLAYTIME");
-//                RemindersClient.LOGGER.info(playtime + " Ticks | " + playtimeInMinutes(playtime) + " Minutes | " + playtimeInHours(playtime) + " Hours");
-//            }
+            if (sessionTicks % 100 == 0 && Config.isDev.get()) { // Log every 5s
+                RemindersClient.LOGGER.info("SESSION TIME: " + ticksToHours(sessionTicks) + "h, " + ticksToMinutes(sessionTicks) + "min, " + sessionTicks + "t");
+            }
         });
+    }
+
+    // Calculate into minutes and hours as doubles for extra time info
+    // Or smth like that idfk, I just like seeing numbers go up
+    private static double ticksToMinutes(double ticks) {
+        double minutes = ticks / 20.0 / 60.0;
+        return BigDecimal.valueOf(minutes).setScale(2, RoundingMode.HALF_UP).doubleValue();
+    }
+
+    private static double ticksToHours(double ticks) {
+        double hours = ticks / 20.0 / 60.0 / 60.0;
+        return BigDecimal.valueOf(hours).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 
     // Toast

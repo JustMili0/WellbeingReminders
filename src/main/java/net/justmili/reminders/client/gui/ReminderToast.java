@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 public class ReminderToast implements Toast {
-    private static final ResourceLocation SYSTEM = RemindersClient.asMinecraft("toast/system");
+    private static final ResourceLocation SYSTEM = RemindersClient.asMinecraft("toast/advancement");
 
     private final Component title;
     private final Component message;
@@ -27,15 +27,15 @@ public class ReminderToast implements Toast {
 
         guiGraphics.renderItem(icon, 8, 8, 0);
 
-        guiGraphics.drawString(component.getMinecraft().font, title, 30, 7, 0xFFFFFF, false);
-        guiGraphics.drawString(component.getMinecraft().font, message, 30, 18, 0xAAAAAA, false);
+        guiGraphics.drawString(component.getMinecraft().font, title, 30, 7, 0xFFFF00, false);
+        guiGraphics.drawString(component.getMinecraft().font, message, 30, 18, 0xFFFFFF, false);
 
         return visibleTime >= 5000? Visibility.HIDE : Visibility.SHOW;
     }
 
     @Override
     public int width() {
-        return 180;
+        return 170;
     }
 
     @Override

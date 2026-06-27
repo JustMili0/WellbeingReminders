@@ -8,6 +8,7 @@ public class Config {
     public static MConfigBuilder builder = new MConfigBuilder(RemindersClient.MODID, null, false);
 
     public static ConfigEntry<Boolean>
+        isDev,
         enableHydrateReminder,
         enableMealReminder,
         enableBreakReminder,
@@ -25,6 +26,8 @@ public class Config {
         wristExcReminderInterval;
 
     public static void register() {
+        isDev = builder.comment("Enable/Disable Developer Logs").define("isDev", false);
+
         enableHydrateReminder = builder.comment("Should the mod remind you to hydrate?")
             .define("enableHydrateReminder", true);
         hydrateReminderInterval = builder.comment("How often should the reminder pop up? (In minutes)")
