@@ -66,7 +66,7 @@ public class TickToasts {
     private static void newToast(Component reminderKey, ItemStack icon) {
         Minecraft client = Minecraft.getInstance();
 
-        client.getToastManager().addToast(
+        client.gui.toastManager().addToast(
             new ReminderToast(TransKeys.reminderTitleKey, reminderKey, icon)
         );
         if (client.player != null) {
@@ -124,7 +124,7 @@ public class TickToasts {
             sleepReminderLastFired = today;
             newToast(
                 TransKeys.sleepTitle,
-                new ItemStack(Items.RED_BED)
+                new ItemStack(Items.BED.red())
             );
         }
     }
