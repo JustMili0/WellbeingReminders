@@ -23,7 +23,7 @@ dependencies {
     modImplementation(libs.fabric.api.get())
 
     // https://maven.caffeinemc.net/#/releases/net/caffeinemc/sodium-fabric-api
-    modCompileOnly("net.caffeinemc:sodium-fabric-api:0.8.12-beta.2+mc1.21.1")
+    modCompileOnly("net.caffeinemc:sodium-fabric-api:${rootProject.property("sodium")}+mc${mcVersion}")
 
     modImplementation("com.terraformersmc:modmenu:${rootProject.property("mod_menu")}") // Mod menu
     //include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${libs.versions.mixinsquared.get()}")!!)!!)
