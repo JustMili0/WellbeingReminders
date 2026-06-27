@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": ["${mod_authors}"],
+  "contact": {
+    "issues": "",
+    "homepage": ""
+  },
+  "license": "${mod_license}",
+  "icon": "icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.justmili.reminders.client.RemindersClient"
+    ],
+    "sodium:config_api_user": [
+      "net.justmili.reminders.client.config.SodiumApiOptions"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": ">=${fabric_api_version}",
+    "minecraft": "${minecraft_version_constraint}",
+    "sodium": "*"
+  },
+  "recommends": {
+    "reeses-sodium-options": "*"
+  }
+}
