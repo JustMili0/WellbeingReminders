@@ -1,7 +1,7 @@
 package net.justmili.reminders.client.config;
 
-import net.justmili.libsmini.v1.config.MConfigBuilder;
-import net.justmili.libsmini.v1.config.entry.ConfigEntry;
+import net.justmili.libs.v1.config.MConfigBuilder;
+import net.justmili.libs.v1.config.entry.ConfigEntry;
 import net.justmili.reminders.client.RemindersClient;
 
 public class Config {

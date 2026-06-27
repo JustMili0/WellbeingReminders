@@ -1,8 +1,8 @@
-package net.justmili.libsmini.v1.config.entry;
+package net.justmili.libs.v1.config.entry;
 
-import net.justmili.libsmini.CoreLibsMini;
-import net.justmili.libsmini.v1.config.ConfigLoader;
-import net.justmili.libsmini.v1.config.items.ConfigItem;
+import net.justmili.libs.CoreLibsMini;
+import net.justmili.libs.v1.config.ConfigLoader;
+import net.justmili.libs.v1.config.items.ConfigItem;
 
 import java.util.ArrayList;
 import java.util.List;

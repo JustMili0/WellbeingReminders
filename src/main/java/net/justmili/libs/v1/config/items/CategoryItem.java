@@ -1,4 +1,4 @@
-package net.justmili.libsmini.v1.config.items;
+package net.justmili.libs.v1.config.items;
 
 import java.util.ArrayList;
 import java.util.List;

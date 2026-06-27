@@ -5,7 +5,7 @@ import net.caffeinemc.mods.sodium.api.config.option.OptionBinding;
 import net.caffeinemc.mods.sodium.api.config.structure.BooleanOptionBuilder;
 import net.caffeinemc.mods.sodium.api.config.structure.ConfigBuilder;
 import net.caffeinemc.mods.sodium.api.config.structure.IntegerOptionBuilder;
-import net.justmili.libsmini.v1.config.entry.ConfigEntry;
+import net.justmili.libs.v1.config.entry.ConfigEntry;
 import net.justmili.reminders.client.RemindersClient;
 import net.justmili.reminders.client.lang.TransKeys;
 import net.minecraft.network.chat.Component;

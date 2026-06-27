@@ -1,10 +1,10 @@
-package net.justmili.libsmini.v1.config;
+package net.justmili.libs.v1.config;
 
-import net.justmili.libsmini.CoreLibsMini;
-import net.justmili.libsmini.v1.config.entry.ConfigEntry;
-import net.justmili.libsmini.v1.config.entry.ListConfigEntry;
-import net.justmili.libsmini.v1.config.items.CategoryItem;
-import net.justmili.libsmini.v1.config.writer.PropertiesWriter;
+import net.justmili.libs.CoreLibsMini;
+import net.justmili.libs.v1.config.entry.ConfigEntry;
+import net.justmili.libs.v1.config.entry.ListConfigEntry;
+import net.justmili.libs.v1.config.items.CategoryItem;
+import net.justmili.libs.v1.config.type.properties.PropertiesWriter;
 
 import java.io.File;
 import java.nio.file.Path;
