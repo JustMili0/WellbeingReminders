@@ -107,7 +107,7 @@ public class TickToasts {
         timedToast(
             playtime, Config.breakReminderInterval.get(),
             TransKeys.breakTitle,
-            new ItemStack(Items.RABBIT_STEW)
+            new ItemStack(Items.CLOCK)
         );
     }
     private static void sleepReminder() {
@@ -135,7 +135,7 @@ public class TickToasts {
         timedToast(
             playtime, Config.stretchReminderInterval.get(),
             TransKeys.stretchTitle,
-            new ItemStack(Items.RABBIT_STEW)
+            new ItemStack(Items.FEATHER)
         );
     }
     private static void wristExcReminder(long playtime) {
@@ -144,7 +144,7 @@ public class TickToasts {
         timedToast(
             playtime, Config.wristExcReminderInterval.get(),
             TransKeys.wristExcTitle,
-            new ItemStack(Items.RABBIT_STEW)
+            new ItemStack(Items.WOODEN_SWORD)
         );
     }
 }

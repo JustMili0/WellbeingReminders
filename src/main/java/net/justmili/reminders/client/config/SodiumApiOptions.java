@@ -15,7 +15,7 @@ public class SodiumApiOptions implements ConfigEntryPoint {
     @Override
     public void registerConfigLate(ConfigBuilder builder) {
         builder.registerOwnModOptions()
-            .setNonTintedIcon(RemindersClient.asResource("icon.png"))
+            .setNonTintedIcon(RemindersClient.asPath("icon.png"))
             .addPage(builder.createOptionPage()
                 .setName(TransKeys.configTitleKey)
 

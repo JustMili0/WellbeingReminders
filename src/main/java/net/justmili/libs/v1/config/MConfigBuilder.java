@@ -1,6 +1,6 @@
 package net.justmili.libs.v1.config;
 
-import net.justmili.libs.CoreLibsMini;
+import net.justmili.libs.CoreLibs;
 import net.justmili.libs.v1.config.entry.ConfigEntry;
 import net.justmili.libs.v1.config.entry.ListConfigEntry;
 import net.justmili.libs.v1.config.items.CategoryItem;
@@ -34,7 +34,7 @@ public class MConfigBuilder {
 
     public void closeCat() {
         if (stack.size() <= 1) {
-            CoreLibsMini.LOGGER.warn("closeCat() called without a matching openCat(), ignoring.");
+            CoreLibs.LOGGER.warn("closeCat() called without a matching openCat(), ignoring.");
             return;
         }
         stack.pop();

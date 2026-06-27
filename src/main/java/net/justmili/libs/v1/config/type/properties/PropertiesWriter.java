@@ -1,6 +1,6 @@
 package net.justmili.libs.v1.config.type.properties;
 
-import net.justmili.libs.CoreLibsMini;
+import net.justmili.libs.CoreLibs;
 import net.justmili.libs.v1.config.entry.ConfigEntry;
 import net.justmili.libs.v1.config.entry.ListConfigEntry;
 import net.justmili.libs.v1.config.items.CategoryItem;
@@ -23,7 +23,7 @@ public class PropertiesWriter {
             writer.write("# "+path.getFileName()+"\n\n");
             writeItems(writer, root.children(), false);
         } catch (IOException e) {
-            CoreLibsMini.LOGGER.error("Failed to write config: {}", e.getMessage());
+            CoreLibs.LOGGER.error("Failed to write config: {}", e.getMessage());
         }
     }
 
@@ -31,7 +31,7 @@ public class PropertiesWriter {
         for (ConfigItem item : items) {
             if (item instanceof CategoryItem categoryItem) {
                 if (!warnedAboutCategories) {
-                    CoreLibsMini.LOGGER.warn("Categories are not supported in .properties format, flattening.");
+                    CoreLibs.LOGGER.warn("Categories are not supported in .properties format, flattening.");
                     warnedAboutCategories = true;
                 }
                 writeItems(writer, categoryItem.children(), warnedAboutCategories);
@@ -55,7 +55,7 @@ public class PropertiesWriter {
         try (FileInputStream inputStream = new FileInputStream(path.toFile())) {
             properties.load(inputStream);
         } catch (IOException e) {
-            CoreLibsMini.LOGGER.error("Failed to load config: {}", e.getMessage());
+            CoreLibs.LOGGER.error("Failed to load config: {}", e.getMessage());
             return;
         }
         for (ConfigEntry<?> entry : entries.values()) entry.load(properties.getProperty(entry.key()));

@@ -1,6 +1,6 @@
 package net.justmili.libs.v1.config.entry;
 
-import net.justmili.libs.CoreLibsMini;
+import net.justmili.libs.CoreLibs;
 import net.justmili.libs.v1.config.ConfigLoader;
 import net.justmili.libs.v1.config.items.ConfigItem;
 
@@ -57,7 +57,7 @@ public class ListConfigEntry<T> implements ConfigItem {
             try {
                 parsed.add(parse(trimmed));
             } catch (Exception e) {
-                CoreLibsMini.LOGGER.warn("Failed to parse list element '{}' for key '{}', skipping.", trimmed, key);
+                CoreLibs.LOGGER.warn("Failed to parse list element '{}' for key '{}', skipping.", trimmed, key);
             }
         }
 
@@ -68,7 +68,7 @@ public class ListConfigEntry<T> implements ConfigItem {
         Class<?> type = type();
         for (T element : list) {
             if (!type.isInstance(element)) {
-                CoreLibsMini.LOGGER.warn("List '{}' contains invalid type '{}', expected '{}', ignoring.",
+                CoreLibs.LOGGER.warn("List '{}' contains invalid type '{}', expected '{}', ignoring.",
                     key, element.getClass().getSimpleName(), type.getSimpleName());
                 return false;
             }
