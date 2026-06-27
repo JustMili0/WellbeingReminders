@@ -1,20 +1,25 @@
 package net.justmili.reminders.content.events.client;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.justmili.reminders.client.config.Config;
 import net.justmili.reminders.client.gui.ReminderToast;
 import net.justmili.reminders.client.lang.TransKeys;
-import net.justmili.reminders.client.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class TickToasts {
-    private static int sessionTicks = -1;
+    private static long sessionTicks = -1;
+    private static LocalDate sleepReminderLastFired = null;
 
     public static void register() {
-        ClientTickEvents.END_CLIENT_TICK.register(minecraft -> {
-            if (minecraft.player == null) {
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (client.player == null) {
                 sessionTicks = -1;
                 return;
             }
@@ -24,17 +29,16 @@ public class TickToasts {
             } else {
                 sessionTicks++;
             }
-            double playtime = sessionTicks;
 
             // Trigger reminders
-            hydrateReminder(playtime);
-            mealReminder(playtime);
+            hydrateReminder(sessionTicks);
+            mealReminder(sessionTicks);
 
-            breakReminder(playtime);
-            sleepReminder(playtime);
+            breakReminder(sessionTicks);
+            sleepReminder(); // Based on real time, not session play time
 
-            stretchReminder(playtime);
-            wristExcReminder(playtime);
+            stretchReminder(sessionTicks);
+            wristExcReminder(sessionTicks);
 
             // Dev env stuff
 //            if (sessionTicks % 20 == 0) {
@@ -45,69 +49,87 @@ public class TickToasts {
     }
 
     // Toast
-    private static void newToast(Component titleKey, Component messageKey, ItemStack icon) {
-        Minecraft.getInstance().getToasts().addToast(
-            new ReminderToast(titleKey, messageKey, icon)
-        );
-    }
-    private static void timedToast(double playtime, int intervalMinutes, Component titleKey, Component messageKey, ItemStack icon) {
-        int ticks = (int) playtime,
-            intervalTicks = intervalMinutes * 1200;
+    private static void newToast(Component reminderKey, ItemStack icon) {
+        Minecraft client = Minecraft.getInstance();
 
-        if (ticks > 0 && ticks % intervalTicks == 0) {
-            newToast(titleKey, messageKey, icon);
+        client.getToasts().addToast(
+            new ReminderToast(TransKeys.reminderTitleKey, reminderKey, icon)
+        );
+        if (client.player != null) {
+            client.player.playSound(SoundEvents.NOTE_BLOCK_CHIME.value(), 2f, 2f);
+        }
+    }
+    private static void timedToast(long playtime, int intervalMinutes, Component reminderKey, ItemStack icon) {
+        int intervalTicks = intervalMinutes * 1200;
+
+        if (playtime > 0 && playtime % intervalTicks == 0) {
+            newToast(reminderKey, icon);
         }
     }
 
     // Reminders
-    private static void hydrateReminder(double playtime) {
+    private static void hydrateReminder(long playtime) {
+        if (!Config.enableHydrateReminder.get()) return;
+
         timedToast(
             playtime, Config.hydrateReminderInterval.get(),
             TransKeys.hydrateTitle,
-            TransKeys.hydrateMessage,
             new ItemStack(Items.POTION)
         );
     }
-    private static void mealReminder(double playtime) {
+    private static void mealReminder(long playtime) {
+        if (!Config.enableMealReminder.get()) return;
+
         timedToast(
             playtime, Config.mealReminderInterval.get(),
             TransKeys.mealTitle,
-            TransKeys.mealMessage,
             new ItemStack(Items.RABBIT_STEW)
         );
     }
 
-    private static void breakReminder(double playtime) {
+    private static void breakReminder(long playtime) {
+        if (!Config.enableBreakReminder.get()) return;
+
         timedToast(
             playtime, Config.breakReminderInterval.get(),
             TransKeys.breakTitle,
-            TransKeys.breakMessage,
             new ItemStack(Items.RABBIT_STEW)
         );
     }
-    private static void sleepReminder(double playtime) {
-        // Custom: Play toast at a specific hour
+    private static void sleepReminder() {
+        if (!Config.enableSleepReminder.get()) return;
 
-        newToast(
-            TransKeys.sleepTitle,
-            TransKeys.sleepMessage,
-            new ItemStack(Items.RED_BED)
-        );
+        LocalTime now = LocalTime.now();
+        LocalTime target = LocalTime.of(Config.sleepReminderHour.get(), Config.sleepReminderMinute.get());
+        LocalDate today = LocalDate.now();
+
+        boolean alreadyFiredToday = today.equals(sleepReminderLastFired),
+            pastTargetTime = !now.isBefore(target);
+
+        if (pastTargetTime && !alreadyFiredToday) {
+            sleepReminderLastFired = today;
+            newToast(
+                TransKeys.sleepTitle,
+                new ItemStack(Items.RED_BED)
+            );
+        }
     }
 
-    private static void stretchReminder(double playtime) {
+    private static void stretchReminder(long playtime) {
+        if (!Config.enableStretchReminder.get()) return;
+
         timedToast(
             playtime, Config.stretchReminderInterval.get(),
             TransKeys.stretchTitle,
-            TransKeys.stretchMessage,
             new ItemStack(Items.RABBIT_STEW)
         );
     }
-    private static void wristExcReminder(double playtime) {
+    private static void wristExcReminder(long playtime) {
+        if (!Config.enableWristExcReminder.get()) return;
+
         timedToast(
             playtime, Config.wristExcReminderInterval.get(),
             TransKeys.wristExcTitle,
-            TransKeys.wristExcMessage,
             new ItemStack(Items.RABBIT_STEW)
         );
     }

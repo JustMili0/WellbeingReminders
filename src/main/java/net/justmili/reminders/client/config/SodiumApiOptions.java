@@ -36,6 +36,32 @@ public class SodiumApiOptions implements ConfigEntryPoint {
 
                 .addOption(newBooleanOption(builder, Config.enableSleepReminder,
                     TransKeys.configSleepTitle, TransKeys.configSleepDesc))
+                .addOption(builder.createIntegerOption(RemindersClient.asResource(Config.sleepReminderHour.key().toLowerCase()))
+                    .setName(TransKeys.configSleepHourTitle)
+                    .setTooltip(TransKeys.configSleepDesc)
+                    .setDefaultValue(Config.sleepReminderHour.defaultValue())
+                    .setRange(Config.sleepReminderHour.min(), Config.sleepReminderHour.max(), 1)
+                    .setValueFormatter(hour -> {
+                        int displayHour = hour % 12 == 0 ? 12 : hour % 12;
+                        int minute = Config.sleepReminderMinute.get();
+                        Component suffix = hour < 12 ? TransKeys.configUnitHourAmKey : TransKeys.configUnitHourPmKey;
+                        return Component.literal(String.format("%d:%02d ", displayHour, minute)).append(suffix);
+                    })
+                    .setBinding(new OptionBindingImpl<>(Config.sleepReminderHour))
+                    .setStorageHandler(Config.builder.getConfig()::save))
+                .addOption(builder.createIntegerOption(RemindersClient.asResource(Config.sleepReminderMinute.key().toLowerCase()))
+                    .setName(TransKeys.configSleepMinTitle)
+                    .setTooltip(TransKeys.configSleepDesc)
+                    .setDefaultValue(Config.sleepReminderMinute.defaultValue())
+                    .setRange(Config.sleepReminderMinute.min(), Config.sleepReminderMinute.max(), 1)
+                    .setValueFormatter(minute -> {
+                        int hour = Config.sleepReminderHour.get();
+                        int displayHour = hour % 12 == 0 ? 12 : hour % 12;
+                        Component suffix = hour < 12 ? TransKeys.configUnitHourAmKey : TransKeys.configUnitHourPmKey;
+                        return Component.literal(String.format("%d:%02d ", displayHour, minute)).append(suffix);
+                    })
+                    .setBinding(new OptionBindingImpl<>(Config.sleepReminderMinute))
+                    .setStorageHandler(Config.builder.getConfig()::save))
 
                 .addOption(newBooleanOption(builder, Config.enableStretchReminder,
                     TransKeys.configStretchTitle, TransKeys.configStretchDesc))
