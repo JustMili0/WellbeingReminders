@@ -20,9 +20,6 @@ public class RemindersClient implements ClientModInitializer {
     public static ResourceLocation asResource(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
-    public static ResourceLocation asPath(String path) {
-        return ResourceLocation.parse(path);
-    }
     public static ResourceLocation asMinecraft(String path) {
         return ResourceLocation.withDefaultNamespace(path);
     }

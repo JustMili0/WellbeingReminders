@@ -15,25 +15,29 @@ public class SodiumApiOptions implements ConfigEntryPoint {
     @Override
     public void registerConfigLate(ConfigBuilder builder) {
         builder.registerOwnModOptions()
-            .setNonTintedIcon(RemindersClient.asPath("icon.png"))
+            .setNonTintedIcon(RemindersClient.asResource("../../icon.png")) // I'm kinda surprised this worked lmao
             .addPage(builder.createOptionPage()
                 .setName(TransKeys.configTitleKey)
 
+                // Hydrate
                 .addOption(newBooleanOption(builder, Config.enableHydrateReminder,
                     TransKeys.configHydrateTitle, TransKeys.configHydrateDesc))
                 .addOption(newIntegerOption(builder, Config.hydrateReminderInterval, 5,
                     TransKeys.configHydrateIntTitle, TransKeys.configHydrateDesc))
 
+                // Meal
                 .addOption(newBooleanOption(builder, Config.enableMealReminder,
                     TransKeys.configMealTitle, TransKeys.configMealDesc))
                 .addOption(newIntegerOption(builder, Config.mealReminderInterval, 5,
                     TransKeys.configMealIntTitle, TransKeys.configMealDesc))
 
+                // Break
                 .addOption(newBooleanOption(builder, Config.enableBreakReminder,
                     TransKeys.configBreakTitle, TransKeys.configBreakDesc))
                 .addOption(newIntegerOption(builder, Config.breakReminderInterval, 5,
                     TransKeys.configBreakIntTitle, TransKeys.configBreakDesc))
 
+                // Sleep
                 .addOption(newBooleanOption(builder, Config.enableSleepReminder,
                     TransKeys.configSleepTitle, TransKeys.configSleepDesc))
                 .addOption(builder.createIntegerOption(RemindersClient.asResource(Config.sleepReminderHour.key().toLowerCase()))
@@ -63,11 +67,13 @@ public class SodiumApiOptions implements ConfigEntryPoint {
                     .setBinding(new OptionBindingImpl<>(Config.sleepReminderMinute))
                     .setStorageHandler(Config.builder.getConfig()::save))
 
+                // Stretching out
                 .addOption(newBooleanOption(builder, Config.enableStretchReminder,
                     TransKeys.configStretchTitle, TransKeys.configStretchDesc))
                 .addOption(newIntegerOption(builder, Config.stretchReminderInterval, 5,
                     TransKeys.configStretchIntTitle, TransKeys.configStretchDesc))
 
+                // Wrist exercises
                 .addOption(newBooleanOption(builder, Config.enableWristExcReminder,
                     TransKeys.configWristExcTitle, TransKeys.configWristExcDesc))
                 .addOption(newIntegerOption(builder, Config.wristExcReminderInterval, 5,

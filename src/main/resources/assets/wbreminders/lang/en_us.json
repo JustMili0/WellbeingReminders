@@ -12,7 +12,7 @@
   "toast.wbreminders.stretch.title": "Stretch out a bit",
   "toast.wbreminders.wristexc.title": "Exercise your wrists a bit",
 
-  "config.wbreminders.hydrate.title": "Hydration Reminder",
+  "config.wbreminders.hydrate.title": "Hydrate Reminder",
   "config.wbreminders.hydrate.int.title": "Hydration Interval",
   "config.wbreminders.hydrate.desc": "Should the mod remind you to hydrate, and how often?",
 
@@ -27,7 +27,7 @@
   "config.wbreminders.sleep.title": "Sleep Reminder",
   "config.wbreminders.sleep.hour.title": "Sleep Hour",
   "config.wbreminders.sleep.minute.title": "Sleep Hour (Min.)",
-  "config.wbreminders.sleep.desc": "Should the mod remind you to go to sleep, and at what time??",
+  "config.wbreminders.sleep.desc": "Should the mod remind you to go to sleep, and at what time?",
 
   "config.wbreminders.stretch.title": "Stretch Reminder",
   "config.wbreminders.stretch.int.title": "Stretch Interval",

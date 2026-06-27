@@ -1,2 +1,0 @@
-## TODO
-- Translate to Polish
