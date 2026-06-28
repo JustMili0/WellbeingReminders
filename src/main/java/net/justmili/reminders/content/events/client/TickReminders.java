@@ -46,7 +46,7 @@ public class TickReminders {
 
             // Dev env stuff
             if (sessionTicks % Config.devLoggingFrequency.get() == 0 && Config.isDev.get()) {
-                RemindersClient.LOGGER.info("SESSION TIME: " + MathUtil.ticksToHours(sessionTicks) + "h, " + MathUtil.ticksToMinutes(sessionTicks) + "min, " + sessionTicks + "t");
+                RemindersClient.LOGGER.info("SESSION TIME: {}h, {}min, {}t", MathUtil.ticksToHours(sessionTicks), MathUtil.ticksToMinutes(sessionTicks), sessionTicks);
             }
         });
     }
