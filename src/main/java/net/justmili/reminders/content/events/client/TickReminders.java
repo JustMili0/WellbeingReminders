@@ -45,7 +45,7 @@ public class TickReminders {
             wristExcReminder(sessionTicks);
 
             // Dev env stuff
-            if (sessionTicks % 100 == 0 && Config.isDev.get()) { // Log every 5s
+            if (sessionTicks % Config.devLoggingFrequency.get() == 0 && Config.isDev.get()) {
                 RemindersClient.LOGGER.info("SESSION TIME: " + MathUtil.ticksToHours(sessionTicks) + "h, " + MathUtil.ticksToMinutes(sessionTicks) + "min, " + sessionTicks + "t");
             }
         });
