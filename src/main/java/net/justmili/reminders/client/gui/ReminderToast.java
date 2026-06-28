@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 public class ReminderToast implements Toast {
-    private static final ResourceLocation SYSTEM = ResourceUtil.asMinecraft("toast/advancement");
+    private static final ResourceLocation TOAST = ResourceUtil.asMinecraft("toast/advancement");
 
     private final Component title;
     private final Component message;
@@ -23,7 +23,7 @@ public class ReminderToast implements Toast {
 
     @Override
     public Visibility render(GuiGraphics guiGraphics, ToastComponent component, long visibleTime) {
-        guiGraphics.blitSprite(SYSTEM, 0, 0, width(), height());
+        guiGraphics.blitSprite(TOAST, 0, 0, width(), height());
 
         guiGraphics.renderItem(icon, 8, 8, 0);
 
