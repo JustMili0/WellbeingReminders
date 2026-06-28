@@ -1,8 +1,11 @@
 {
   "config.wbreminders.title": "Wellbeing Reminders",
+  "config.wbreminders.reminders.title": "Reminders",
+  "config.wbreminders.intervals.title": "Intervals",
   "config.wbreminders.unit.minutes": "%s Min.",
   "config.wbreminders.unit.hour.am": "AM",
   "config.wbreminders.unit.hour.pm": "PM",
+
   "toast.wbreminders.reminders.title": "Reminder!",
 
   "toast.wbreminders.hydrate.title": "Hydrate",
@@ -11,6 +14,9 @@
   "toast.wbreminders.sleep.title": "It's bedtime",
   "toast.wbreminders.stretch.title": "Stretch out a bit",
   "toast.wbreminders.wristexc.title": "Exercise your wrists a bit",
+
+  "config.wbreminders.ping.title": "Reminder Ping",
+  "config.wbreminders.ping.desc": "Should the mod play a \"ping\" sound when a reminder pops up?",
 
   "config.wbreminders.hydrate.title": "Hydrate Reminder",
   "config.wbreminders.hydrate.int.title": "Hydration Interval",
