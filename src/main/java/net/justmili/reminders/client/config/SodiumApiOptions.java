@@ -17,67 +17,92 @@ public class SodiumApiOptions implements ConfigEntryPoint {
         builder.registerOwnModOptions()
             .setNonTintedIcon(RemindersClient.asResource("../../icon.png")) // I'm kinda surprised this worked lmao
             .addPage(builder.createOptionPage()
-                .setName(TransKeys.configTitleKey)
+                .setName(TransKeys.configTitle)
 
-                // Hydrate
-                .addOption(newBooleanOption(builder, Config.enableHydrateReminder,
-                    TransKeys.configHydrateTitle, TransKeys.configHydrateDesc))
-                .addOption(newIntegerOption(builder, Config.hydrateReminderInterval, 5,
-                    TransKeys.configHydrateIntTitle, TransKeys.configHydrateDesc))
+                .addOptionGroup(builder.createOptionGroup()
+                    .setName(TransKeys.configRemindersTitle)
 
-                // Meal
-                .addOption(newBooleanOption(builder, Config.enableMealReminder,
-                    TransKeys.configMealTitle, TransKeys.configMealDesc))
-                .addOption(newIntegerOption(builder, Config.mealReminderInterval, 5,
-                    TransKeys.configMealIntTitle, TransKeys.configMealDesc))
+                    // Ping
+                    .addOption(newBooleanOption(builder, Config.enableReminderPing,
+                        TransKeys.configRemindPingTitle, TransKeys.configRemindPingDesc))
 
-                // Break
-                .addOption(newBooleanOption(builder, Config.enableBreakReminder,
-                    TransKeys.configBreakTitle, TransKeys.configBreakDesc))
-                .addOption(newIntegerOption(builder, Config.breakReminderInterval, 5,
-                    TransKeys.configBreakIntTitle, TransKeys.configBreakDesc))
+                    // Hydrate
+                    .addOption(newBooleanOption(builder, Config.enableHydrateReminder,
+                        TransKeys.configHydrateTitle, TransKeys.configHydrateDesc))
 
-                // Sleep
-                .addOption(newBooleanOption(builder, Config.enableSleepReminder,
-                    TransKeys.configSleepTitle, TransKeys.configSleepDesc))
-                .addOption(builder.createIntegerOption(RemindersClient.asResource(Config.sleepReminderHour.key().toLowerCase()))
-                    .setName(TransKeys.configSleepHourTitle)
-                    .setTooltip(TransKeys.configSleepDesc)
-                    .setDefaultValue(Config.sleepReminderHour.defaultValue())
-                    .setRange(Config.sleepReminderHour.min(), Config.sleepReminderHour.max(), 1)
-                    .setValueFormatter(hour -> {
-                        int displayHour = hour % 12 == 0 ? 12 : hour % 12;
-                        int minute = Config.sleepReminderMinute.get();
-                        Component suffix = hour < 12 ? TransKeys.configUnitHourAmKey : TransKeys.configUnitHourPmKey;
-                        return Component.literal(String.format("%d:%02d ", displayHour, minute)).append(suffix);
-                    })
-                    .setBinding(new OptionBindingImpl<>(Config.sleepReminderHour))
-                    .setStorageHandler(Config.builder.getConfig()::save))
-                .addOption(builder.createIntegerOption(RemindersClient.asResource(Config.sleepReminderMinute.key().toLowerCase()))
-                    .setName(TransKeys.configSleepMinTitle)
-                    .setTooltip(TransKeys.configSleepDesc)
-                    .setDefaultValue(Config.sleepReminderMinute.defaultValue())
-                    .setRange(Config.sleepReminderMinute.min(), Config.sleepReminderMinute.max(), 1)
-                    .setValueFormatter(minute -> {
-                        int hour = Config.sleepReminderHour.get();
-                        int displayHour = hour % 12 == 0 ? 12 : hour % 12;
-                        Component suffix = hour < 12 ? TransKeys.configUnitHourAmKey : TransKeys.configUnitHourPmKey;
-                        return Component.literal(String.format("%d:%02d ", displayHour, minute)).append(suffix);
-                    })
-                    .setBinding(new OptionBindingImpl<>(Config.sleepReminderMinute))
-                    .setStorageHandler(Config.builder.getConfig()::save))
+                    // Meal
+                    .addOption(newBooleanOption(builder, Config.enableMealReminder,
+                        TransKeys.configMealTitle, TransKeys.configMealDesc))
 
-                // Stretching out
-                .addOption(newBooleanOption(builder, Config.enableStretchReminder,
-                    TransKeys.configStretchTitle, TransKeys.configStretchDesc))
-                .addOption(newIntegerOption(builder, Config.stretchReminderInterval, 5,
-                    TransKeys.configStretchIntTitle, TransKeys.configStretchDesc))
+                    // Break
+                    .addOption(newBooleanOption(builder, Config.enableBreakReminder,
+                        TransKeys.configBreakTitle, TransKeys.configBreakDesc))
 
-                // Wrist exercises
-                .addOption(newBooleanOption(builder, Config.enableWristExcReminder,
-                    TransKeys.configWristExcTitle, TransKeys.configWristExcDesc))
-                .addOption(newIntegerOption(builder, Config.wristExcReminderInterval, 5,
-                    TransKeys.configWristExcIntTitle, TransKeys.configWristExcDesc))
+                    // Sleep
+                    .addOption(newBooleanOption(builder, Config.enableSleepReminder,
+                        TransKeys.configSleepTitle, TransKeys.configSleepDesc))
+
+                    // Stretching out
+                    .addOption(newBooleanOption(builder, Config.enableStretchReminder,
+                        TransKeys.configStretchTitle, TransKeys.configStretchDesc))
+
+                    // Wrist exercises
+                    .addOption(newBooleanOption(builder, Config.enableWristExcReminder,
+                        TransKeys.configWristExcTitle, TransKeys.configWristExcDesc))
+                )
+
+                .addOptionGroup(builder.createOptionGroup()
+                    .setName(TransKeys.configIntervalsTitle)
+
+                    // Hydrate
+                    .addOption(newIntegerOption(builder, Config.hydrateReminderInterval, 5,
+                        TransKeys.configHydrateIntTitle, TransKeys.configHydrateDesc))
+
+                    // Meal
+                    .addOption(newIntegerOption(builder, Config.mealReminderInterval, 5,
+                        TransKeys.configMealIntTitle, TransKeys.configMealDesc))
+
+                    // Break
+                    .addOption(newIntegerOption(builder, Config.breakReminderInterval, 5,
+                        TransKeys.configBreakIntTitle, TransKeys.configBreakDesc))
+
+                    // Sleep
+                    .addOption(builder.createIntegerOption(RemindersClient.asResource(Config.sleepReminderHour.key().toLowerCase()))
+                        .setName(TransKeys.configSleepHourTitle)
+                        .setTooltip(TransKeys.configSleepDesc)
+                        .setDefaultValue(Config.sleepReminderHour.defaultValue())
+                        .setRange(Config.sleepReminderHour.min(), Config.sleepReminderHour.max(), 1)
+                        .setValueFormatter(hour -> {
+                            int displayHour = hour % 12 == 0? 12 : hour % 12;
+                            int minute = Config.sleepReminderMinute.get();
+                            Component suffix = hour < 12? TransKeys.configUnitHourAm : TransKeys.configUnitHourPm;
+                            return Component.literal(String.format("%d:%02d ", displayHour, minute)).append(suffix);
+                        })
+                        .setBinding(new OptionBindingImpl<>(Config.sleepReminderHour))
+                        .setStorageHandler(Config.builder.getConfig()::save))
+                    .addOption(builder.createIntegerOption(RemindersClient.asResource(Config.sleepReminderMinute.key().toLowerCase()))
+                        .setName(TransKeys.configSleepMinTitle)
+                        .setTooltip(TransKeys.configSleepDesc)
+                        .setDefaultValue(Config.sleepReminderMinute.defaultValue())
+                        .setRange(Config.sleepReminderMinute.min(), Config.sleepReminderMinute.max(), 1)
+                        .setValueFormatter(minute -> {
+                            int hour = Config.sleepReminderHour.get();
+                            int displayHour = hour % 12 == 0? 12 : hour % 12;
+                            Component suffix = hour < 12? TransKeys.configUnitHourAm : TransKeys.configUnitHourPm;
+                            return Component.literal(String.format("%d:%02d ", displayHour, minute)).append(suffix);
+                        })
+                        .setBinding(new OptionBindingImpl<>(Config.sleepReminderMinute))
+                        .setStorageHandler(Config.builder.getConfig()::save))
+
+                    // Stretching out
+                    .addOption(newIntegerOption(builder, Config.stretchReminderInterval, 5,
+                        TransKeys.configStretchIntTitle, TransKeys.configStretchDesc))
+
+                    // Wrist exercises
+                    .addOption(newIntegerOption(builder, Config.wristExcReminderInterval, 5,
+                        TransKeys.configWristExcIntTitle, TransKeys.configWristExcDesc))
+
+                )
             );
     }
 
@@ -98,7 +123,7 @@ public class SodiumApiOptions implements ConfigEntryPoint {
             .setTooltip(tooltip)
             .setDefaultValue(entry.defaultValue())
             .setRange(entry.min(), entry.max(), step)
-            .setValueFormatter(value -> Component.translatable(TransKeys.configUnitMinutesKey.getString(), value))
+            .setValueFormatter(value -> Component.translatable(TransKeys.configUnitMinutes.getString(), value))
             .setBinding(new OptionBindingImpl<>(entry))
             .setStorageHandler(Config.builder.getConfig()::save);
     }

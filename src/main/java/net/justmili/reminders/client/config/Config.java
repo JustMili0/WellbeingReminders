@@ -9,6 +9,7 @@ public class Config {
 
     public static ConfigEntry<Boolean>
         isDev,
+        enableReminderPing,
         enableHydrateReminder,
         enableMealReminder,
         enableBreakReminder,
@@ -17,6 +18,7 @@ public class Config {
         enableWristExcReminder;
 
     public static ConfigEntry<Integer>
+        devLoggingFrequency,
         hydrateReminderInterval,
         mealReminderInterval,
         breakReminderInterval,
@@ -27,6 +29,10 @@ public class Config {
 
     public static void register() {
         isDev = builder.comment("Enable/Disable Developer Logs").define("isDev", false);
+        devLoggingFrequency = builder.comment("How many ticks between every Dev log?").define("devLoggingFrequency", 50, 1, 1728000);
+
+        enableReminderPing = builder.comment("Should a \"ping\" sound be played when a reminder pops up?")
+            .define("enableReminderPing", true);
 
         enableHydrateReminder = builder.comment("Should the mod remind you to hydrate?")
             .define("enableHydrateReminder", true);
