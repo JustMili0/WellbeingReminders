@@ -3,6 +3,10 @@ Remember to take care of yourself!
 
 <hr>
 
+***GitHub Notice: This is a `Repository Information` branch. If you wish to see the code, please change to a different branch.***
+
+<hr>
+
 ## Why?
 People need to be reminded to drink water on a hot day, stretch out a little etc.
 
