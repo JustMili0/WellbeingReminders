@@ -1,8 +1,9 @@
 package net.justmili.reminders.client;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.justmili.libs.v1.utils.ResourceUtil;
 import net.justmili.reminders.client.config.Config;
-import net.justmili.reminders.content.events.client.TickToasts;
+import net.justmili.reminders.content.events.client.TickReminders;
 import net.minecraft.resources.Identifier;
 
 public class RemindersClient implements ClientModInitializer {
@@ -13,14 +14,11 @@ public class RemindersClient implements ClientModInitializer {
     public void onInitializeClient() {
         Config.register();
         LOGGER.info("Loaded Wellbeing Reminders Config");
-        TickToasts.register();
+        TickReminders.register();
         LOGGER.info("Initialized Wellbeing Reminders");
     }
 
     public static Identifier asResource(String path) {
-        return Identifier.fromNamespaceAndPath(MODID, path);
-    }
-    public static Identifier asMinecraft(String path) {
-        return Identifier.withDefaultNamespace(path);
+        return ResourceUtil.parse(MODID, path);
     }
 }

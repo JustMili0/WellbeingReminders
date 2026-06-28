@@ -4,11 +4,14 @@ import net.minecraft.network.chat.Component;
 
 public class TransKeys {
     public static Component
-        configTitleKey = newKey("config.wbreminders.title"),
-        configUnitMinutesKey = newKey("config.wbreminders.unit.minutes"),
-        configUnitHourAmKey = newKey("config.wbreminders.unit.hour.am"),
-        configUnitHourPmKey = newKey("config.wbreminders.unit.hour.pm"),
-        reminderTitleKey = newKey("toast.wbreminders.reminders.title"),
+        configTitle = newKey("config.wbreminders.title"),
+        configRemindersTitle = newKey("config.wbreminders.reminders.title"),
+        configIntervalsTitle = newKey("config.wbreminders.intervals.title"),
+        configUnitMinutes = newKey("config.wbreminders.unit.minutes"),
+        configUnitHourAm = newKey("config.wbreminders.unit.hour.am"),
+        configUnitHourPm = newKey("config.wbreminders.unit.hour.pm"),
+
+        reminderTitle = newKey("toast.wbreminders.reminders.title"),
 
         hydrateTitle = newKey("toast.wbreminders.hydrate.title"),
         mealTitle = newKey("toast.wbreminders.meal.title"),
@@ -16,6 +19,9 @@ public class TransKeys {
         sleepTitle = newKey("toast.wbreminders.sleep.title"),
         stretchTitle = newKey("toast.wbreminders.stretch.title"),
         wristExcTitle = newKey("toast.wbreminders.wristexc.title"),
+
+        configRemindPingTitle = newKey("config.wbreminders.ping.title"),
+        configRemindPingDesc =  newKey("config.wbreminders.ping.desc"),
 
         configHydrateTitle = newKey("config.wbreminders.hydrate.title"),
         configHydrateIntTitle = newKey("config.wbreminders.hydrate.int.title"),

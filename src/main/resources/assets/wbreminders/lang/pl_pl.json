@@ -1,8 +1,11 @@
 {
   "config.wbreminders.title": "Wellbeing Reminders",
+  "config.wbreminders.reminders.title": "Przypomnienia",
+  "config.wbreminders.intervals.title": "Interwały",
   "config.wbreminders.unit.minutes": "%s Min.",
   "config.wbreminders.unit.hour.am": "AM",
   "config.wbreminders.unit.hour.pm": "PM",
+
   "toast.wbreminders.reminders.title": "Przypomnienie!",
 
   "toast.wbreminders.hydrate.title": "Nawodnij się",
@@ -11,6 +14,9 @@
   "toast.wbreminders.sleep.title": "Pora iść spać",
   "toast.wbreminders.stretch.title": "Rozciągnij się trochę",
   "toast.wbreminders.wristexc.title": "Trochę poćwicz nadgarstki",
+
+  "config.wbreminders.ping.title": "Dźwięk przypomnienia",
+  "config.wbreminders.ping.desc": "Czy modyfikacja powinna odtworzyć dźwięk sygnalizujący pojawienie się przypomnienia?",
 
   "config.wbreminders.hydrate.title": "Przypomnienie o piciu",
   "config.wbreminders.hydrate.int.title": "Interwał przypomnienia o piciu",

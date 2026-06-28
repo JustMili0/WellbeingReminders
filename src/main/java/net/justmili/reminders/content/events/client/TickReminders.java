@@ -16,7 +16,7 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class TickToasts {
+public class TickReminders {
     private static long sessionTicks = -1;
     private static LocalDate sleepReminderLastFired = null;
 

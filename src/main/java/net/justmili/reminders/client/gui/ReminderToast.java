@@ -1,6 +1,6 @@
 package net.justmili.reminders.client.gui;
 
-import net.justmili.reminders.client.RemindersClient;
+import net.justmili.libs.v1.utils.ResourceUtil;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -11,7 +11,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class ReminderToast implements Toast {
-    private static final Identifier SYSTEM = RemindersClient.asMinecraft("toast/advancement");
+    private static final Identifier TOAST = ResourceUtil.asMinecraft("toast/advancement");
 
     private final Component title;
     private final Component message;
@@ -26,7 +26,7 @@ public class ReminderToast implements Toast {
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, Font font, long fullyVisibleForMs) {
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, SYSTEM, 0, 0, width(), height());
+        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, TOAST, 0, 0, width(), height());
 
         graphics.item(icon, 8, 8, 0);
 
