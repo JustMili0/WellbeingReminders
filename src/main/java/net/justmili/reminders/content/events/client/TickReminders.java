@@ -17,7 +17,7 @@ import java.time.LocalTime;
 
 import static net.justmili.libs.v1.utils.ClientUtil.minecraft;
 
-public class TickToasts {
+public class TickReminders {
     private static long sessionTicks = -1;
     private static LocalDate sleepReminderLastFired = null;
 
