@@ -1,22 +1,23 @@
 package net.justmili.reminders.content.events.client;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.justmili.libs.v1.utils.ClientUtil;
+import net.justmili.libs.v1.utils.MathUtil;
 import net.justmili.reminders.client.RemindersClient;
 import net.justmili.reminders.client.config.Config;
 import net.justmili.reminders.client.gui.ReminderToast;
 import net.justmili.reminders.client.lang.TransKeys;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class TickToasts {
+import static net.justmili.libs.v1.utils.ClientUtil.minecraft;
+
+public class TickReminders {
     private static long sessionTicks = -1;
     private static LocalDate sleepReminderLastFired = null;
 
@@ -44,33 +45,19 @@ public class TickToasts {
             wristExcReminder(sessionTicks);
 
             // Dev env stuff
-            if (sessionTicks % 100 == 0 && Config.isDev.get()) { // Log every 5s
-                RemindersClient.LOGGER.info("SESSION TIME: " + ticksToHours(sessionTicks) + "h, " + ticksToMinutes(sessionTicks) + "min, " + sessionTicks + "t");
+            if (sessionTicks % Config.devLoggingFrequency.get() == 0 && Config.isDev.get()) {
+                RemindersClient.LOGGER.info("SESSION TIME: " + MathUtil.ticksToHours(sessionTicks) + "h, " + MathUtil.ticksToMinutes(sessionTicks) + "min, " + sessionTicks + "t");
             }
         });
     }
 
-    // Calculate into minutes and hours as doubles for extra time info
-    // Or smth like that idfk, I just like seeing numbers go up
-    private static double ticksToMinutes(double ticks) {
-        double minutes = ticks / 20.0 / 60.0;
-        return BigDecimal.valueOf(minutes).setScale(2, RoundingMode.HALF_UP).doubleValue();
-    }
-
-    private static double ticksToHours(double ticks) {
-        double hours = ticks / 20.0 / 60.0 / 60.0;
-        return BigDecimal.valueOf(hours).setScale(2, RoundingMode.HALF_UP).doubleValue();
-    }
-
     // Toast
     private static void newToast(Component reminderKey, ItemStack icon) {
-        Minecraft client = Minecraft.getInstance();
-
-        client.getToastManager().addToast(
-            new ReminderToast(TransKeys.reminderTitleKey, reminderKey, icon)
+        minecraft.getToastManager().addToast(
+            new ReminderToast(TransKeys.reminderTitle, reminderKey, icon)
         );
-        if (client.player != null) {
-            client.player.playSound(SoundEvents.NOTE_BLOCK_CHIME.value(), 2f, 2f);
+        if (Config.enableReminderPing.get()) {
+            ClientUtil.playSound(SoundEvents.NOTE_BLOCK_CHIME.value(), 2f, 2f);
         }
     }
     private static void timedToast(long playtime, int intervalMinutes, Component reminderKey, ItemStack icon) {

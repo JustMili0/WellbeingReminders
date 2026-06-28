@@ -1,6 +1,6 @@
 package net.justmili.reminders.client.gui;
 
-import net.justmili.reminders.client.RemindersClient;
+import net.justmili.libs.v1.utils.ResourceUtil;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -11,7 +11,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class ReminderToast implements Toast {
-    private static final Identifier SYSTEM = RemindersClient.asMinecraft("toast/advancement");
+    private static final Identifier SYSTEM = ResourceUtil.asMinecraft("toast/advancement");
 
     private final Component title;
     private final Component message;
