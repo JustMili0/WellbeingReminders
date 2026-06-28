@@ -1,6 +1,5 @@
 package net.justmili.reminders.content.events.client;
 
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.justmili.libs.v1.utils.ClientUtil;
 import net.justmili.libs.v1.utils.MathUtil;
 import net.justmili.reminders.client.RemindersClient;
@@ -11,44 +10,48 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static net.justmili.libs.v1.utils.ClientUtil.minecraft;
 
+@EventBusSubscriber(Dist.CLIENT)
 public class TickReminders {
     private static long sessionTicks = -1;
     private static LocalDate sleepReminderLastFired = null;
 
-    public static void register() {
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (client.player == null) {
-                sessionTicks = -1;
-                return;
-            }
+    @SubscribeEvent
+    public static void register(ClientTickEvent.Post event) {
+        if (ClientUtil.getPlayer() == null) {
+            sessionTicks = -1;
+            return;
+        }
 
-            if (sessionTicks == -1) {
-                sessionTicks = 0;
-            } else {
-                sessionTicks++;
-            }
+        if (sessionTicks == -1) {
+            sessionTicks = 0;
+        } else {
+            sessionTicks++;
+        }
 
-            // Trigger reminders
-            hydrateReminder(sessionTicks);
-            mealReminder(sessionTicks);
+        // Trigger reminders
+        hydrateReminder(sessionTicks);
+        mealReminder(sessionTicks);
 
-            breakReminder(sessionTicks);
-            sleepReminder(); // Based on real time, not session play time
+        breakReminder(sessionTicks);
+        sleepReminder(); // Based on real time, not session play time
 
-            stretchReminder(sessionTicks);
-            wristExcReminder(sessionTicks);
+        stretchReminder(sessionTicks);
+        wristExcReminder(sessionTicks);
 
-            // Dev env stuff
-            if (sessionTicks % Config.devLoggingFrequency.get() == 0 && Config.isDev.get()) {
-                RemindersClient.LOGGER.info("SESSION TIME: {}h, {}min, {}t", MathUtil.ticksToHours(sessionTicks), MathUtil.ticksToMinutes(sessionTicks), sessionTicks);
-            }
-        });
+        // Dev env stuff
+        if (sessionTicks % Config.devLoggingFrequency.get() == 0 && Config.isDev.get()) {
+            RemindersClient.LOGGER.info("SESSION TIME: {}h, {}min, {}t", MathUtil.ticksToHours(sessionTicks), MathUtil.ticksToMinutes(sessionTicks), sessionTicks);
+        }
     }
 
     // Toast

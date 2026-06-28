@@ -1,0 +1,22 @@
+modLoader="javafml"
+loaderVersion="[0,)"
+license = "${mod_license}"
+issueTrackerURL = "https://github.com/JustMili0/WellbeingReminders/issues"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+description = "${mod_description}"
+authors = "${mod_authors}"
+logoFile = "assets/wbreminders/icon.png"
+
+[[dependencies.${mod_id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft_version_constraint}"
+ordering = "NONE"
+side = "BOTH"
+
+[modproperties.${mod_id}]
+"sodium:config_api_user" = "net.justmili.reminders.client.config.SodiumApiOptions"
