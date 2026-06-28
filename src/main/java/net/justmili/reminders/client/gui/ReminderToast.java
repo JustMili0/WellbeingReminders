@@ -11,7 +11,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class ReminderToast implements Toast {
-    private static final Identifier SYSTEM = ResourceUtil.asMinecraft("toast/advancement");
+    private static final Identifier TOAST = ResourceUtil.asMinecraft("toast/advancement");
 
     private final Component title;
     private final Component message;
@@ -26,7 +26,7 @@ public class ReminderToast implements Toast {
 
     @Override
     public void render(GuiGraphics graphics, Font font, long visibleTime) {
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, SYSTEM, 0, 0, width(), height());
+        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, TOAST, 0, 0, width(), height());
 
         graphics.renderItem(icon, 8, 8, 0);
 
