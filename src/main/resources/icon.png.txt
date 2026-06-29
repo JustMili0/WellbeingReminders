@@ -1,0 +1,3 @@
+Because of how Forge/NeoForge handle mods, icon.png was moved to
+assets/wbreminders/ so it can be accessed by neoforge.mods.toml and
+SodiumApiOptions class at the same time.
