@@ -1,6 +1,5 @@
 package net.justmili.reminders.content.events.client;
 
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.justmili.libs.v1.utils.ClientUtil;
 import net.justmili.libs.v1.utils.MathUtil;
 import net.justmili.reminders.client.RemindersClient;
@@ -11,6 +10,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.common.NeoForge;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -22,8 +23,8 @@ public class TickReminders {
     private static LocalDate sleepReminderLastFired = null;
 
     public static void register() {
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (client.player == null) {
+        NeoForge.EVENT_BUS.addListener((ClientTickEvent.Post event) -> {
+            if (ClientUtil.getPlayer() == null) {
                 sessionTicks = -1;
                 return;
             }

@@ -15,7 +15,7 @@ public class SodiumApiOptions implements ConfigEntryPoint {
     @Override
     public void registerConfigLate(ConfigBuilder builder) {
         builder.registerOwnModOptions()
-            .setNonTintedIcon(RemindersClient.asResource("../../icon.png")) // I'm kinda surprised this worked lmao
+            .setNonTintedIcon(RemindersClient.asResource("icon.png")) // Thing from Fabric doesn't work on Neo :(
             .addPage(builder.createOptionPage()
                 .setName(TransKeys.configTitle)
 

@@ -1,18 +1,11 @@
 [versions]
 minecraft = "26.1.2"
 
-# https://fabricmc.net/develop
-fabric_loader = "0.19.2"
-fabric_api = "0.153.0+26.1.2"
-fabric_loom = "1.16-SNAPSHOT"
-
-# https://github.com/Bawnorton/MixinSquared/releases
-mixinsquared = "0.3.3"
+neoforge = "26.1.2.76"
+moddevgradle = "2.0.141"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
-fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
-fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
 
 [plugins]
-fabric_loom = { id = "net.fabricmc.fabric-loom", version.ref = "fabric_loom" }
+moddevgradle = { id = "net.neoforged.moddev", version.ref = "moddevgradle" }
