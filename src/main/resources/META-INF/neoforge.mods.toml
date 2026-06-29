@@ -18,5 +18,12 @@ versionRange = "${minecraft_version_constraint}"
 ordering = "NONE"
 side = "BOTH"
 
+[[dependencies.${mod_id}]]
+modId = "sodium"
+type = "required"
+versionRange = "*"
+ordering = "NONE"
+side = "CLIENT"
+
 [modproperties.${mod_id}]
 "sodium:config_api_user" = "net.justmili.reminders.client.config.SodiumApiOptions"
