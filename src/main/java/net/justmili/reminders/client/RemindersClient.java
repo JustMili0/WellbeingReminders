@@ -2,6 +2,7 @@ package net.justmili.reminders.client;
 
 import net.justmili.libs.v1.utils.ResourceUtil;
 import net.justmili.reminders.client.config.Config;
+import net.justmili.reminders.content.events.client.TickReminders;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -16,7 +17,7 @@ public class RemindersClient {
     public RemindersClient(IEventBus eventBus, ModContainer container) {
         Config.register();
         LOGGER.info("Loaded Wellbeing Reminders Config");
-        //TickReminders.register();
+        TickReminders.register();
         LOGGER.info("Initialized Wellbeing Reminders");
     }
 
