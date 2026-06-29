@@ -54,7 +54,7 @@ public class TickReminders {
 
     // Toast
     private static void newToast(Component reminderKey, ItemStack icon) {
-        minecraft.getToastManager().addToast(
+        minecraft.gui.toastManager().addToast(
             new ReminderToast(TransKeys.reminderTitle, reminderKey, icon)
         );
         if (Config.enableReminderPing.get()) {
@@ -112,7 +112,7 @@ public class TickReminders {
             sleepReminderLastFired = today;
             newToast(
                 TransKeys.sleepTitle,
-                new ItemStack(Items.RED_BED)
+                new ItemStack(Items.BED.red())
             );
         }
     }
