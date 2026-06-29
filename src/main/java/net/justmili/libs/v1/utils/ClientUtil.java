@@ -1,12 +1,9 @@
 package net.justmili.libs.v1.utils;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
 
-@Environment(EnvType.CLIENT)
 public class ClientUtil {
     public static Minecraft minecraft = Minecraft.getInstance();
 
