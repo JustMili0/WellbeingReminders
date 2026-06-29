@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
 
+//@OnlyIn(Dist.CLIENT)
 public class ClientUtil {
     public static Minecraft minecraft = Minecraft.getInstance();
 
