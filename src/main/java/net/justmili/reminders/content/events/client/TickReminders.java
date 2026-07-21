@@ -22,12 +22,7 @@ public class TickReminders {
     private static LocalDate sleepReminderLastFired = null;
 
     public static void register() {
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (client.player == null) {
-                sessionTicks = -1;
-                return;
-            }
-
+        ClientTickEvents.END_CLIENT_TICK.register(event -> {
             if (sessionTicks == -1) {
                 sessionTicks = 0;
             } else {
