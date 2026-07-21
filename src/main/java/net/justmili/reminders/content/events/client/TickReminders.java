@@ -24,11 +24,6 @@ public class TickReminders {
 
     public static void register() {
         NeoForge.EVENT_BUS.addListener((ClientTickEvent.Post event) -> {
-            if (ClientUtil.getPlayer() == null) {
-                sessionTicks = -1;
-                return;
-            }
-
             if (sessionTicks == -1) {
                 sessionTicks = 0;
             } else {
