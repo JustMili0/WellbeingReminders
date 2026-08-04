@@ -8,17 +8,17 @@ import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 
 public class ReminderToast implements Toast {
     private static final Identifier TOAST = ResourceUtil.asMinecraft("toast/advancement");
 
     private final Component title;
     private final Component message;
-    private final ItemStack icon;
+    private final ItemStackTemplate icon;
     private Visibility wantedVisibility = Visibility.SHOW;
 
-    public ReminderToast(Component title, Component message, ItemStack icon) {
+    public ReminderToast(Component title, Component message, ItemStackTemplate icon) {
         this.title = title;
         this.message = message;
         this.icon = icon;
@@ -28,7 +28,7 @@ public class ReminderToast implements Toast {
     public void extractRenderState(GuiGraphicsExtractor graphics, Font font, long fullyVisibleForMs) {
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, TOAST, 0, 0, width(), height());
 
-        graphics.item(icon, 8, 8, 0);
+        graphics.item(icon.create(), 8, 8, 0);
 
         graphics.text(font, title, 30, 7, 0xFFFFFF00, false);
         graphics.text(font, message, 30, 18, 0xFFFFFFFF, false);
