@@ -9,7 +9,7 @@ import net.justmili.reminders.client.gui.ReminderToast;
 import net.justmili.reminders.client.lang.TransKeys;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 
 import java.time.LocalDate;
@@ -47,7 +47,7 @@ public class TickReminders {
     }
 
     // Toast
-    private static void newToast(Component reminderKey, ItemStack icon) {
+    private static void newToast(Component reminderKey, ItemStackTemplate icon) {
         minecraft.gui.toastManager().addToast(
             new ReminderToast(TransKeys.reminderTitle, reminderKey, icon)
         );
@@ -55,7 +55,7 @@ public class TickReminders {
             ClientUtil.playSound(SoundEvents.NOTE_BLOCK_CHIME.value(), 2f, 2f);
         }
     }
-    private static void timedToast(long playtime, int intervalMinutes, Component reminderKey, ItemStack icon) {
+    private static void timedToast(long playtime, int intervalMinutes, Component reminderKey, ItemStackTemplate icon) {
         int intervalTicks = intervalMinutes * 1200;
 
         if (playtime > 0 && playtime % intervalTicks == 0) {
@@ -70,7 +70,7 @@ public class TickReminders {
         timedToast(
             playtime, Config.hydrateReminderInterval.get(),
             TransKeys.hydrateTitle,
-            new ItemStack(Items.POTION)
+            new ItemStackTemplate(Items.POTION)
         );
     }
     private static void mealReminder(long playtime) {
@@ -79,7 +79,7 @@ public class TickReminders {
         timedToast(
             playtime, Config.mealReminderInterval.get(),
             TransKeys.mealTitle,
-            new ItemStack(Items.RABBIT_STEW)
+            new ItemStackTemplate(Items.RABBIT_STEW)
         );
     }
 
@@ -89,7 +89,7 @@ public class TickReminders {
         timedToast(
             playtime, Config.breakReminderInterval.get(),
             TransKeys.breakTitle,
-            new ItemStack(Items.CLOCK)
+            new ItemStackTemplate(Items.CLOCK)
         );
     }
     private static void sleepReminder() {
@@ -106,7 +106,7 @@ public class TickReminders {
             sleepReminderLastFired = today;
             newToast(
                 TransKeys.sleepTitle,
-                new ItemStack(Items.BED.red())
+                new ItemStackTemplate(Items.BED.red())
             );
         }
     }
@@ -117,7 +117,7 @@ public class TickReminders {
         timedToast(
             playtime, Config.stretchReminderInterval.get(),
             TransKeys.stretchTitle,
-            new ItemStack(Items.FEATHER)
+            new ItemStackTemplate(Items.FEATHER)
         );
     }
     private static void wristExcReminder(long playtime) {
@@ -126,7 +126,7 @@ public class TickReminders {
         timedToast(
             playtime, Config.wristExcReminderInterval.get(),
             TransKeys.wristExcTitle,
-            new ItemStack(Items.WOODEN_SWORD)
+            new ItemStackTemplate(Items.WOODEN_SWORD)
         );
     }
 }
